@@ -50,5 +50,18 @@ for iter in range(1, 301):
         w1.grad.zero_()
         w2.grad.zero_()
 
+print('w1: ', w1)
+print('w2: ', w2)
+
+x_train_tensor = torch.from_numpy(x_train)
+y_predicted_in_tensor = x_train_tensor.mm(w1).clamp(min=0).mm(w2)
+
+predicted = y_predicted_in_tensor.detach().numpy()
+print(predicted)
+
+plt.plot(x_train, y_train, 'ro', label='Original Data')
+plt.plot(x_train, predicted, label='Fitted Line')
+plt.legend()
+plt.show()
 
 
